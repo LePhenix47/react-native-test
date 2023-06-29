@@ -17,6 +17,14 @@ export function useFetch(url: string): FetchResponse {
 
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const options: RequestInit = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": process.env.API_KEY,
+      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+    },
+  };
+
   //Will execute once and also everytime the url changes
   useEffect(() => {
     //We need the controller in case we make multiple successions of fetch requests
@@ -34,14 +42,9 @@ export function useFetch(url: string): FetchResponse {
 
     async function fetchData() {
       try {
-        const response: Response = await fetch(url);
+        const response: Response = await fetch(url, options);
 
         switch (response.status) {
-          case 200:
-          case 201: {
-            break;
-          }
-
           case 400: {
             throw new Error(`Error 400, bad request: ${response.statusText}`);
           }
@@ -56,11 +59,27 @@ export function useFetch(url: string): FetchResponse {
             throw new Error(`Error 403, unauthorized: ${response.statusText}`);
           }
 
+          case 500: {
+            throw new Error(`Error 500`);
+          }
+
+          case 502: {
+            throw new Error(`Error 502`);
+          }
+
+          case 503: {
+            throw new Error(`Error 503`);
+          }
+
+          case 504: {
+            throw new Error(`Error 504`);
+          }
+
           default:
             break;
         }
 
-        const dataFromFetch = await response.json();
+        const dataFromFetch: any = await response.json();
 
         setData(dataFromFetch);
       } catch (APIError) {

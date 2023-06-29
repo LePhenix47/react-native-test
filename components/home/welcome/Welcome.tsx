@@ -26,6 +26,7 @@ const Welcome = () => {
   const router = useRouter();
 
   const [activeJob, setActiveJob] = useState(jobTypes[0]);
+  const [inputValue, setInputValue] = useState<string>("");
   return (
     <View>
       <View style={styles.container}>
@@ -37,9 +38,10 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
+            value={inputValue}
             onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-              log(e);
+              // log(e.currentTarget);
+              setInputValue(e.target.value);
             }}
             placeholder="Search for a job"
           ></TextInput>
@@ -75,6 +77,7 @@ const Welcome = () => {
 
                   router.push(`search/${item}`);
                 }}
+                key={item}
               >
                 <Text style={styles.tabText(activeJob, item)}>{item}</Text>
               </TouchableOpacity>
