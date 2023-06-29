@@ -20,6 +20,9 @@ import { icons, SIZES } from "../../../constants";
 import styles from "./welcome.style";
 
 const Welcome = () => {
+  const jobTypes: string[] = ["Full-time", "Part-time", "Contractor"];
+
+  const [activeJob, setActiveJob] = useState(jobTypes[0]);
   return (
     <View>
       <View style={styles.container}>
@@ -51,6 +54,19 @@ const Welcome = () => {
             style={styles.searchBtnImage}
           ></Image>
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.tabsContainer}>
+        <FlatList
+          data={jobTypes}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity>
+                <Text>{item}</Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
       </View>
     </View>
   );
