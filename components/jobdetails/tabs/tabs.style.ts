@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     marginTop: SIZES.small,
     marginBottom: SIZES.small / 2,
   },
+  //@ts-ignore
   btn: (name, activeTab) => ({
     paddingVertical: SIZES.medium,
     paddingHorizontal: SIZES.xLarge,
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
   }),
+  //@ts-ignore
   btnText: (name, activeTab) => ({
     fontFamily: "DMMedium",
     fontSize: SIZES.small,
