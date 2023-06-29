@@ -14,16 +14,18 @@ import Specifics from "./jobdetails/specifics/Specifics";
 
 // common
 import NearbyJobCard from "./common/cards/nearby/NearbyJobCard";
+import PopularJobCard from "./common/cards/popular/PopularJobCard";
 
 export {
   ScreenHeaderBtn,
   Welcome,
   NearbyJobs,
+  NearbyJobCard,
   PopularJobs,
+  PopularJobCard,
   Company,
   JobTabs,
   JobAbout,
   JobFooter,
   Specifics,
-  NearbyJobCard,
 };

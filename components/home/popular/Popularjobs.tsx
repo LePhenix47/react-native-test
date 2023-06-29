@@ -1,14 +1,34 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 
-import styles from './popularjobs.style'
+import { useRouter } from "expo-router";
+
+import styles from "./popularjobs.style";
+import { COLORS, SIZES } from "../../../constants";
+
+import { PopularJobCard } from "../../../components";
 
 const PopularJobs = () => {
   return (
-    <View>
-      <Text>PopularJobs</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text></Text>
+        <TouchableOpacity>
+          <Text></Text>
+        </TouchableOpacity>
+      </View>
 
-export default PopularJobs
+      <View style={styles.cardsContainer}>
+        <FlatList />
+      </View>
+    </View>
+  );
+};
+
+export default PopularJobs;
