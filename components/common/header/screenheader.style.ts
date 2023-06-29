@@ -8,15 +8,11 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: COLORS.white,
     borderRadius: SIZES.small / 1.25,
+    //Useless since RN components natively use flex as their initial display
+    display: "flex", 
     justifyContent: "center",
     alignItems: "center",
-  },
-  //@ts-ignore
-  btnImg: (dimension) => ({
-    width: dimension,
-    height: dimension,
-    borderRadius: SIZES.small / 1.25,
-  }),
+  }
 });
 
 export default styles;

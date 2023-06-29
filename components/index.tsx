@@ -3,7 +3,7 @@ import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 // home screen
 import Welcome from "./home/welcome/Welcome";
 import NearbyJobs from "./home/nearby/NearbyJobs";
-import Popularjobs from "./home/popular/Popularjobs";
+import PopularJobs from "./home/popular/Popularjobs";
 
 // job details screen
 import Company from "./jobdetails/company/Company";
@@ -19,7 +19,7 @@ export {
   ScreenHeaderBtn,
   Welcome,
   NearbyJobs,
-  Popularjobs,
+  PopularJobs,
   Company,
   JobTabs,
   JobAbout,

@@ -1,13 +1,22 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image, ImageSourcePropType } from 'react-native'
 
 import styles from './screenheader.style'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { SIZES } from '../../../constants'
 
-const ScreenHeaderBtn = () => {
+const ScreenHeaderBtn = ({iconUrl,dimension,handlePress}:{iconUrl: ImageSourcePropType,dimension:string,handlePress?}) => {
   return (
-    <View>
-      <Text>ScreenHeaderBtn</Text>
-    </View>
+   <TouchableOpacity style={styles.btnContainer} onPress={handlePress}>
+      <Image source={iconUrl}
+      resizeMode="cover"
+      style={{
+        width: dimension,
+        height: dimension,
+        borderRadius: SIZES.small / 1.25,
+  }}
+      />
+   </TouchableOpacity>
   )
 }
 
