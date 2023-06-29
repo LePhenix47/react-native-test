@@ -15,7 +15,7 @@ export function useFetch(url: string): FetchResponse {
 
   const [hasError, setError] = useState<boolean>(false);
 
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<any>({});
 
   const options: RequestInit = {
     method: "GET",
@@ -30,62 +30,32 @@ export function useFetch(url: string): FetchResponse {
     //We need the controller in case we make multiple successions of fetch requests
     const controller: AbortController = new AbortController();
 
-    log("Fetch →", { url }, "loading...");
-
     setLoading(true);
 
     const noUrlWasProvided: boolean = !url;
     if (noUrlWasProvided) {
-      log("There must be an URL passed as an argument");
-      return;
+      throw new Error("No was URL passed as an argument");
     }
 
     async function fetchData() {
       try {
         const response: Response = await fetch(url, options);
 
-        switch (response.status) {
-          case 400: {
-            throw new Error(`Error 400, bad request: ${response.statusText}`);
-          }
+        const hasError: boolean = !response.ok;
 
-          case 401: {
-            throw new Error(
-              `Error 401, unauthenticated: ${response.statusText}`
-            );
-          }
+        if (hasError) {
+          const code: number = response.status;
+          const errorMessage: string = await response.text();
 
-          case 403: {
-            throw new Error(`Error 403, unauthorized: ${response.statusText}`);
-          }
-
-          case 500: {
-            throw new Error(`Error 500`);
-          }
-
-          case 502: {
-            throw new Error(`Error 502`);
-          }
-
-          case 503: {
-            throw new Error(`Error 503`);
-          }
-
-          case 504: {
-            throw new Error(`Error 504`);
-          }
-
-          default:
-            break;
+          throw new Error(`Error ${code}, ${errorMessage}`);
         }
 
         const dataFromFetch: any = await response.json();
 
         setData(dataFromFetch);
+        log("SUCCESS!");
       } catch (APIError) {
-        console.error(
-          `⚠ API Error found! An unexpected error has occured while attempting to make a call to the API → ${APIError}`
-        );
+        // console.error(`⚠ API Error → ${APIError}`);
         setError(true);
         setErrorMessage(APIError);
       } finally {

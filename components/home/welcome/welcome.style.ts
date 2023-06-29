@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: activeJobType === item ? COLORS.secondary : COLORS.gray2,
   }),
-    //@ts-ignore
   tabText: (activeJobType, item) => ({
     fontFamily: FONT.medium,
     color: activeJobType === item ? COLORS.secondary : COLORS.gray2,

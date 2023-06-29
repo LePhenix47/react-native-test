@@ -39,9 +39,9 @@ const Welcome = () => {
           <TextInput
             style={styles.searchInput}
             value={inputValue}
-            onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-              // log(e.currentTarget);
-              setInputValue(e.target.value);
+            onChangeText={(inputValue: string) => {
+              log("Input:", inputValue);
+              setInputValue(inputValue);
             }}
             placeholder="Search for a job"
           ></TextInput>
@@ -50,7 +50,7 @@ const Welcome = () => {
         <TouchableOpacity
           style={styles.searchBtn}
           onPress={(e: GestureResponderEvent) => {
-            log("Pressed!");
+            log("Pressed search button!");
           }}
         >
           <Image

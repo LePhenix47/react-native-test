@@ -14,12 +14,13 @@ import { COLORS, SIZES } from "../../../constants";
 
 import { PopularJobCard } from "../../../components";
 import { useFetch } from "../../../utils/hooks/use-fetch.hook";
+import { log } from "../../../utils/functions/console.functions";
 
 export default function PopularJobs() {
-  const url: string =
-    "https://jsearch.p.rapidapi.com/search?query=Python%20developer%20in%20Texas%2C%20USA&page=1&num_pages=1";
+  const url: string = "https://jsearch.p.rapidapi.com/search?query=developer";
 
-  // const { data, isLoading, hasError, errorMessage } = useFetch(url);
+  const { data, isLoading, hasError, errorMessage } = useFetch(url);
+  log(data, isLoading, hasError, errorMessage);
 
   return (
     <View style={styles.container}>
@@ -31,21 +32,46 @@ export default function PopularJobs() {
       </View>
 
       <View style={styles.cardsContainer}>
-        {/* <ActivityIndicator
-          color={COLORS.primary}
-          size={"large"}
-        ></ActivityIndicator> */}
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-          renderItem={({ item }: { item }) => {
-            return <PopularJobCard key={item} />;
-          }}
-          keyExtractor={({ item }) => {
-            return item?.job_id;
-          }}
-          contentContainerStyle={{ columnGap: SIZES.medium }}
-          horizontal
-        />
+        {isLoading && (
+          <ActivityIndicator
+            color={COLORS.primary}
+            size={"large"}
+          ></ActivityIndicator>
+        )}
+
+        {hasError && (
+          <Text
+            style={{
+              width: "100%",
+            }}
+          >
+            Oops an unexpected error has occured:{" "}
+            <Text
+              style={{
+                color: "red",
+                textAlign: "justify",
+                alignItems: "center",
+              }}
+            >
+              {
+                //@ts-ignore
+                errorMessage?.message
+              }
+            </Text>
+          </Text>
+        )}
+
+        {!!data && (
+          <FlatList
+            data={data}
+            renderItem={({ item }: { item: any }) => {
+              return <PopularJobCard key={item} />;
+            }}
+            keyExtractor={({ item }) => item.job_id}
+            contentContainerStyle={{ columnGap: SIZES.medium }}
+            horizontal
+          />
+        )}
       </View>
     </View>
   );
