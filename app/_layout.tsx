@@ -29,6 +29,5 @@ export default function Layout(): JSX.Element {
   if (noFontsLoaded) {
     return null;
   }
-  //@ts-ignore
   return <Stack onLayout={onLayoutRootView} />;
 }

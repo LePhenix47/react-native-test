@@ -18,9 +18,12 @@ import { useRouter } from "expo-router";
 import { icons, SIZES } from "../../../constants";
 
 import styles from "./welcome.style";
+import { log } from "../../../utils/functions/console.functions";
 
 const Welcome = () => {
   const jobTypes: string[] = ["Full-time", "Part-time", "Contractor"];
+
+  const router = useRouter();
 
   const [activeJob, setActiveJob] = useState(jobTypes[0]);
   return (
@@ -36,7 +39,7 @@ const Welcome = () => {
             style={styles.searchInput}
             value=""
             onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-              console.log(e);
+              log(e);
             }}
             placeholder="Search for a job"
           ></TextInput>
@@ -45,7 +48,7 @@ const Welcome = () => {
         <TouchableOpacity
           style={styles.searchBtn}
           onPress={(e: GestureResponderEvent) => {
-            console.log("Pressed!");
+            log("Pressed!");
           }}
         >
           <Image
@@ -57,15 +60,31 @@ const Welcome = () => {
       </View>
 
       <View style={styles.tabsContainer}>
+        {/*
+          The `<FlatList />` component efficiently renders large, smoothly-scrollable lists
+        */}
         <FlatList
           data={jobTypes}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity>
-                <Text>{item}</Text>
+              //
+              <TouchableOpacity
+                style={styles.tab(activeJob, item)}
+                onPress={(e: GestureResponderEvent) => {
+                  setActiveJob(item);
+
+                  router.push(`search/${item}`);
+                }}
+              >
+                <Text style={styles.tabText(activeJob, item)}>{item}</Text>
               </TouchableOpacity>
             );
           }}
+          keyExtractor={(item) => {
+            return item;
+          }}
+          contentContainerStyle={{ columnGap: SIZES.small }}
+          horizontal
         />
       </View>
     </View>
