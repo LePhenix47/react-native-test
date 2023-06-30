@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,17 +10,49 @@ import {
 import { useRouter } from "expo-router";
 
 import styles from "./popularjobs.style";
+
+import popularJobsMock from "../../../mocks/popular-jobs.mock";
+
 import { COLORS, SIZES } from "../../../constants";
 
 import { PopularJobCard } from "../../../components";
-import { useFetch } from "../../../utils/hooks/use-fetch.hook";
+
 import { log } from "../../../utils/functions/console.functions";
+import {
+  waitPromiseError,
+  waitPromiseSuccess,
+} from "../../../utils/functions/promise-test.functions";
 
 export default function PopularJobs() {
-  const url: string = "https://jsearch.p.rapidapi.com/search?query=developer";
+  const url: string = "../../../mocks/popular-jobs.mock.ts";
 
-  const { data, isLoading, hasError, errorMessage } = useFetch(url);
-  log(data, isLoading, hasError, errorMessage);
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [error, setError] = useState<any>(null);
+
+  async function addPopularJobsMock() {
+    setIsLoading(true);
+    try {
+      const result: any = await waitPromiseError(1_000, "Test error");
+      // const result: any = await waitPromiseSuccess(1_000, popularJobsMock);
+      setData(result);
+
+      log(result);
+    } catch (apiError) {
+      console.error(apiError);
+      setHasError(true);
+      setError(apiError);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    addPopularJobsMock();
+
+    return () => {};
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -43,21 +75,19 @@ export default function PopularJobs() {
           <Text
             style={{
               width: "100%",
+              fontSize: SIZES.medium,
             }}
           >
-            Oops an unexpected error has occured:{" "}
+            Oops an unexpected error has occured:{"\n"}
             <Text
               style={{
-                color: "red",
+                color: "#dc362e",
                 textAlign: "justify",
                 alignItems: "center",
               }}
             >
-              {
-                //@ts-ignore
-                errorMessage?.message
-              }
-            </Text>
+              {error}
+            </Text>{" "}
           </Text>
         )}
 

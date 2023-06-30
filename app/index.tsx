@@ -27,18 +27,18 @@ import { COLORS, FONT, SHADOWS, SIZES, icons, images } from "../constants";
 
 export default function Home(): JSX.Element {
   const route = useRouter();
+
+  const marginSides: number = 10;
   return (
     //The <SafeAreaView /> componnt provides a safe zone to render the app's components without being covered by the device's hardware features
     <SafeAreaView
       style={{
         flex: 1,
         backgroundColor: "transparent",
-        borderWidth: 2, // Border width in pixels
-        borderColor: "red", // Border color
-        borderRadius: 10, // Border radius
-        margin: 4,
         marginTop: 0,
+        marginLeft: marginSides,
         marginBottom: 0,
+        marginRight: marginSides,
       }}
     >
       <Stack.Screen

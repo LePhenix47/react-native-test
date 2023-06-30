@@ -5,7 +5,14 @@ type FetchResponse = {
   data: any[];
   isLoading: boolean;
   hasError: boolean;
-  errorMessage: string;
+  errorMessage: {
+    error: {
+      message: string;
+      code: number;
+    };
+    request_id: string;
+    status: string;
+  };
 };
 
 export function useFetch(url: string): FetchResponse {
@@ -17,13 +24,14 @@ export function useFetch(url: string): FetchResponse {
 
   const [errorMessage, setErrorMessage] = useState<any>({});
 
-  const options: RequestInit = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": process.env.API_KEY,
-      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-    },
-  };
+  const options: RequestInit = null;
+  // const options: RequestInit = {
+  //   method: "GET",
+  //   headers: {
+  //     "X-RapidAPI-Key": "KJwZZIJSFimshuivMSVGaiYzkRomp15f2vKjsnK4bKzuUzVLzA",
+  //     "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+  //   },
+  // };
 
   //Will execute once and also everytime the url changes
   useEffect(() => {
@@ -34,7 +42,7 @@ export function useFetch(url: string): FetchResponse {
 
     const noUrlWasProvided: boolean = !url;
     if (noUrlWasProvided) {
-      throw new Error("No was URL passed as an argument");
+      throw new Error("No URL was provided for the fetch call!");
     }
 
     async function fetchData() {
@@ -44,10 +52,16 @@ export function useFetch(url: string): FetchResponse {
         const hasError: boolean = !response.ok;
 
         if (hasError) {
-          const code: number = response.status;
-          const errorMessage: string = await response.text();
+          const errorMessage: {
+            error: {
+              message: string;
+              code: number;
+            };
+            request_id: string;
+            status: string;
+          } = JSON.parse(await response.text());
 
-          throw new Error(`Error ${code}, ${errorMessage}`);
+          throw errorMessage;
         }
 
         const dataFromFetch: any = await response.json();
@@ -55,7 +69,6 @@ export function useFetch(url: string): FetchResponse {
         setData(dataFromFetch);
         log("SUCCESS!");
       } catch (APIError) {
-        // console.error(`⚠ API Error → ${APIError}`);
         setError(true);
         setErrorMessage(APIError);
       } finally {
