@@ -11,7 +11,7 @@ import { useRouter } from "expo-router";
 
 import styles from "./popularjobs.style";
 
-import popularJobsMock from "../../../mocks/popular-jobs.mock";
+import { popularJobsMock, MockedData } from "../../../mocks/popular-jobs.mock";
 
 import { COLORS, SIZES } from "../../../constants";
 
@@ -26,7 +26,7 @@ import {
 export default function PopularJobs() {
   const url: string = "../../../mocks/popular-jobs.mock.ts";
 
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<MockedData>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -34,8 +34,11 @@ export default function PopularJobs() {
   async function addPopularJobsMock() {
     setIsLoading(true);
     try {
-      const result: any = await waitPromiseError(1_000, "Test error");
-      // const result: any = await waitPromiseSuccess(1_000, popularJobsMock);
+      // const result: any = await waitPromiseError(1_000, "Test error");
+      const result: MockedData = await waitPromiseSuccess(
+        1_000,
+        popularJobsMock
+      );
       setData(result);
 
       log(result);
@@ -52,7 +55,7 @@ export default function PopularJobs() {
     addPopularJobsMock();
 
     return () => {};
-  }, []);
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -93,11 +96,11 @@ export default function PopularJobs() {
 
         {!!data && (
           <FlatList
-            data={data}
+            data={data.data}
             renderItem={({ item }: { item: any }) => {
               return <PopularJobCard key={item} />;
             }}
-            keyExtractor={({ item }) => item.job_id}
+            keyExtractor={({ item }) => item}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />
