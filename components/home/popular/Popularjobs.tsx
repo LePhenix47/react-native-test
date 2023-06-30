@@ -23,39 +23,10 @@ import {
   waitPromiseError,
   waitPromiseSuccess,
 } from "../../../utils/functions/promise-test.functions";
+import { useMockSuccess } from "../../../utils/hooks/use-mock-success.hook";
 
 export default function PopularJobs() {
-  const url: string = "../../../mocks/popular-jobs.mock.ts";
-
-  const [data, setData] = useState<MockedData>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasError, setHasError] = useState<boolean>(false);
-  const [error, setError] = useState<any>(null);
-  async function addPopularJobsMock() {
-    setIsLoading(true);
-    try {
-      // const result: any = await waitPromiseError(1_000, "Test error");
-      const result: MockedData = await waitPromiseSuccess(
-        1_000,
-        popularJobsMock
-      );
-      setData(result);
-
-      log(result);
-    } catch (apiError) {
-      console.error(apiError);
-      setHasError(true);
-      setError(apiError);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    addPopularJobsMock();
-
-    return () => {};
-  }, [data]);
+  const { data, isLoading, hasError, error } = useMockSuccess("popular");
 
   return (
     <View style={styles.container}>

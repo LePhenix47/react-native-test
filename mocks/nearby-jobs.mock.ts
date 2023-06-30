@@ -1,9 +1,6 @@
-import { MockedData } from "../utils/types/mocked-data.types";
+import { JobData, MockedData } from "../utils/types/mocked-data.types";
 
-/**
- * Mocked data for the `<PopularJobs />` component
- */
-export const popularJobsMock: MockedData = {
+export const nearbyJobsMock = {
   status: "OK",
   request_id: "d12633dc-cf89-42a0-97b8-1c595866786a",
   parameters: {
