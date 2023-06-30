@@ -57,6 +57,10 @@ const NearbyJobs = () => {
           </Text>
         )}
 
+        {!data?.data?.length && (
+          <Text>No data to show here (╯°□°）╯︵ ┻━┻</Text>
+        )}
+
         {!!data &&
           data.data.map((job, index) => {
             return (

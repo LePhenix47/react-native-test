@@ -65,6 +65,8 @@ export default function PopularJobs() {
           </Text>
         )}
 
+        {!data?.data?.length && <Text>No data to show here ¯\_(ツ)_/¯</Text>}
+
         {!!data && (
           <FlatList
             data={data.data}
