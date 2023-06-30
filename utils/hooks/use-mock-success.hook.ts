@@ -24,8 +24,6 @@ export function useMockSuccess(type: "nearby" | "popular") {
       }
       // const result: any = await waitPromiseError(1_000, "Test error");
       setData(result);
-
-      log(result);
     } catch (apiError) {
       console.error(apiError);
       setHasError(true);

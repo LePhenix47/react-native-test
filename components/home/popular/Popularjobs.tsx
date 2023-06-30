@@ -73,6 +73,7 @@ export default function PopularJobs() {
                 <PopularJobCard
                   key={item}
                   item={item}
+                  // selectedJob={null}
                   handleCardPress={() => {
                     log("Clicked popular job card!");
                   }}
