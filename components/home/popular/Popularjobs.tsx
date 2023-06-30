@@ -31,7 +31,6 @@ export default function PopularJobs() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
-
   async function addPopularJobsMock() {
     setIsLoading(true);
     try {
@@ -99,9 +98,17 @@ export default function PopularJobs() {
           <FlatList
             data={data.data}
             renderItem={({ item }: { item: any }) => {
-              return <PopularJobCard key={item} />;
+              return (
+                <PopularJobCard
+                  key={item}
+                  item={item}
+                  handleCardPress={() => {
+                    log("Clicked popular job card!");
+                  }}
+                />
+              );
             }}
-            keyExtractor={({ item }) => item}
+            keyExtractor={({ item }) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />

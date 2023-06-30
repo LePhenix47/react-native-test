@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }),
   logoImage: {
-    width: "70%",
-    height: "70%",
+    width: "80%",
+    height: "80%",
   },
   companyName: {
     fontSize: SIZES.medium,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     marginTop: SIZES.large,
-  },  
+  },
   //@ts-ignore
   jobName: (selectedJob, item) => ({
     fontSize: SIZES.large,
@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
     marginTop: 5,
     justifyContent: "flex-start",
     alignItems: "center",
-  },  
+  },
   //@ts-ignore
   publisher: (selectedJob) => ({
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.bold,
     //@ts-ignore
     color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
-  }),  
+  }),
   //@ts-ignore
   location: {
     fontSize: SIZES.medium - 2,
