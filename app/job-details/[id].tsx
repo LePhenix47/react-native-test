@@ -24,21 +24,62 @@ import { useMockSuccess } from "../../utils/hooks/use-mock-success.hook";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, SIZES, icons, images } from "../../constants";
 import { JobData } from "../../utils/types/mocked-data.types";
+import { log } from "../../utils/functions/console.functions";
 
 const JobDetails = () => {
+  const tabs = ["About", "Qualifications", "Responsibilites"];
+
   const params = useSearchParams();
   const router = useRouter();
 
   const { data, isLoading, hasError, error } = useMockSuccess("popular");
   // const data = null;
 
-  const idOfData: string = data?.data?.find((job: JobData) => {
+  const idOfData: number = data?.data?.findIndex((job: JobData) => {
     return job.job_id === params.id;
-  }).job_id;
+  });
 
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>(tabs[0]);
 
   function onRefresh() {}
+
+  function displayTabContent() {
+    switch (activeTab) {
+      case "About": {
+        const qualifications = data.data[0].job_highlights?.qualifications || [
+          "N/A",
+        ];
+
+        log(qualifications);
+        return (
+          //@ts-ignore
+          <Specifics title={"About"} points={qualifications} />
+        );
+      }
+
+      case "Qualifications": {
+        return (
+          <Specifics
+            title={"Qualifications"}
+            points={data.data[0].job_highlights?.qualifications || ["N/A"]}
+          />
+        );
+      }
+
+      case "Responsibilites": {
+        return (
+          <Specifics
+            title={"Responsibilites"}
+            points={data.data[0].job_highlights?.qualifications || ["N/A"]}
+          />
+        );
+      }
+
+      default:
+        break;
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -120,12 +161,18 @@ const JobDetails = () => {
             <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
               {/*                */}
               <Company
-                companyLogo={data.data[0].employer_logo}
-                jobTitle={data.data[0].job_title}
-                companyName={data.data[0].employer_name}
-                location={data.data[0].job_country}
+                companyLogo={data.data[idOfData]?.employer_logo}
+                jobTitle={data.data[idOfData]?.job_title}
+                companyName={data.data[idOfData]?.employer_name}
+                location={data.data[idOfData]?.job_country}
               />
-              <JobTabs />
+              <JobTabs
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
+
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>

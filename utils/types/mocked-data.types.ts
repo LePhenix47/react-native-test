@@ -42,7 +42,10 @@ export type JobData = {
   job_max_salary: number | null;
   job_salary_currency: string | null;
   job_salary_period: string | null;
-  job_highlights: string[] | null;
+  job_highlights: {
+    qualifications?: string[];
+    responsibilities?: string[];
+  } | null;
   job_job_title: string | null;
   job_posting_language: string;
   job_onet_soc: string;
