@@ -11,7 +11,8 @@ import { useRouter } from "expo-router";
 
 import styles from "./popularjobs.style";
 
-import { popularJobsMock, MockedData } from "../../../mocks/popular-jobs.mock";
+import { popularJobsMock } from "../../../mocks/popular-jobs.mock";
+import { MockedData } from "../../../utils/types/mocked-data.types";
 
 import { COLORS, SIZES } from "../../../constants";
 
