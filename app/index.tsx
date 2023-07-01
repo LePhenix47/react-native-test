@@ -26,7 +26,7 @@ import {
 import { COLORS, FONT, SHADOWS, SIZES, icons, images } from "../constants";
 
 export default function Home(): JSX.Element {
-  const route = useRouter();
+  const router = useRouter();
 
   const [searchValue, setSearchValue] = useState("");
   return (
@@ -69,7 +69,18 @@ export default function Home(): JSX.Element {
     */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <Welcome searchValue={searchValue} />
+          <Welcome
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            handlePress={() => {
+              const hasNotSearched: boolean = !searchValue;
+              if (hasNotSearched) {
+                return;
+              }
+
+              router.push(`/search/${searchValue}`);
+            }}
+          />
           <PopularJobs />
           <NearbyJobs />
         </View>

@@ -77,10 +77,10 @@ export default function PopularJobs() {
               return (
                 <PopularJobCard
                   item={item}
-                  // selectedJob={null}
+                  selectedJob={null}
                   handleCardPress={() => {
                     log("Clicked popular job card!");
-                    // router.push(`/job-details/${item.job_id}`);
+                    router.push(`/job-details/${item.job_id}`);
                   }}
                 />
               );

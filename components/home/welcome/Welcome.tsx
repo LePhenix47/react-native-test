@@ -20,7 +20,7 @@ import { icons, SIZES } from "../../../constants";
 import styles from "./welcome.style";
 import { log } from "../../../utils/functions/console.functions";
 
-const Welcome = () => {
+const Welcome = ({ searchValue, setSearchValue, handlePress }) => {
   const jobTypes: string[] = ["Full-time", "Part-time", "Contractor"];
 
   const router = useRouter();
@@ -40,19 +40,15 @@ const Welcome = () => {
             style={styles.searchInput}
             value={inputValue}
             onChangeText={(inputValue: string) => {
-              log("Input:", inputValue);
               setInputValue(inputValue);
+
+              setSearchValue(inputValue);
             }}
             placeholder="Search for a job"
           ></TextInput>
         </View>
 
-        <TouchableOpacity
-          style={styles.searchBtn}
-          onPress={(e: GestureResponderEvent) => {
-            log("Pressed search button!");
-          }}
-        >
+        <TouchableOpacity style={styles.searchBtn} onPress={handlePress}>
           <Image
             source={icons.search}
             resizeMode="contain"
