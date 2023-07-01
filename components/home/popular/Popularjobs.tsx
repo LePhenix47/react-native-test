@@ -65,7 +65,9 @@ export default function PopularJobs() {
           </Text>
         )}
 
-        {!data?.data?.length && <Text>No data to show here ¯\_(ツ)_/¯</Text>}
+        {!data?.data?.length && !isLoading && (
+          <Text>No data to show here ¯\_(ツ)_/¯</Text>
+        )}
 
         {!!data && (
           <FlatList

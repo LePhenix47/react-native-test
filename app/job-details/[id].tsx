@@ -47,31 +47,35 @@ const JobDetails = () => {
   function displayTabContent() {
     switch (activeTab) {
       case "About": {
-        const qualifications = data.data[0].job_highlights?.qualifications || [
+        const about = data.data[idOfData]?.job_highlights?.qualifications || [
           "N/A",
         ];
 
-        log(qualifications);
-        return (
-          //@ts-ignore
-          <Specifics title={"About"} points={qualifications} />
-        );
+        return <Specifics title={"About"} points={about} />;
       }
 
       case "Qualifications": {
+        const qualifications = data.data[idOfData]?.job_highlights
+          ?.qualifications || ["N/A"];
+
+        log("qualifications: ", qualifications);
+
         return (
           <Specifics
             title={"Qualifications"}
-            points={data.data[0].job_highlights?.qualifications || ["N/A"]}
+            points={qualifications || ["N/A"]}
           />
         );
       }
 
       case "Responsibilites": {
+        const responsibilites = data.data[idOfData]?.job_highlights
+          ?.qualifications || ["N/A"];
+
         return (
           <Specifics
             title={"Responsibilites"}
-            points={data.data[0].job_highlights?.qualifications || ["N/A"]}
+            points={responsibilites || ["N/A"]}
           />
         );
       }
