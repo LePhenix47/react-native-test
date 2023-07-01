@@ -29,6 +29,8 @@ export default function PopularJobs() {
   const router = useRouter();
   const { data, isLoading, hasError, error } = useMockSuccess("popular");
 
+  const [selectedJob, setSelectedJob] = useState<string>("");
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -81,6 +83,7 @@ export default function PopularJobs() {
                   handleCardPress={() => {
                     log("Clicked popular job card!");
                     router.push(`/job-details/${item.job_id}`);
+                    setSelectedJob(item.job_id);
                   }}
                 />
               );
