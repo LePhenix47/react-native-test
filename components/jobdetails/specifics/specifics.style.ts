@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   },
   pointsContainer: {
     marginVertical: SIZES.small,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   pointWrapper: {
     flexDirection: "row",

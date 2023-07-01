@@ -18,12 +18,12 @@ import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 const NearbyJobs = () => {
   const router = useRouter();
 
-  const { data, isLoading, hasError, error } = useMockSuccess("nearby");
+  const { data, isLoading, hasError, error } = useMockSuccess("popular");
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular jobs</Text>
+        <Text style={styles.headerTitle}>Nearby jobs</Text>
         <TouchableOpacity>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>

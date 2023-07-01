@@ -2,7 +2,7 @@
 import { Stack, useRouter } from "expo-router";
 
 //React
-import React from "react";
+import React, { useState } from "react";
 
 //React Native
 import { View, Text, ScrollView } from "react-native";
@@ -28,17 +28,13 @@ import { COLORS, FONT, SHADOWS, SIZES, icons, images } from "../constants";
 export default function Home(): JSX.Element {
   const route = useRouter();
 
-  const marginSides: number = 10;
+  const [searchValue, setSearchValue] = useState("");
   return (
     //The <SafeAreaView /> componnt provides a safe zone to render the app's components without being covered by the device's hardware features
     <SafeAreaView
       style={{
         flex: 1,
         backgroundColor: "transparent",
-        marginTop: 0,
-        marginLeft: marginSides,
-        marginBottom: 0,
-        marginRight: marginSides,
       }}
     >
       <Stack.Screen
@@ -72,8 +68,8 @@ export default function Home(): JSX.Element {
         It basically acts as a <div> but with an overflow: scroll 
     */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <Welcome />
+        <View style={{ flex: 1, padding: SIZES.medium }}>
+          <Welcome searchValue={searchValue} />
           <PopularJobs />
           <NearbyJobs />
         </View>

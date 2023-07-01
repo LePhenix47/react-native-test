@@ -1,14 +1,31 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
 
-import styles from './footer.style'
+import styles from "./footer.style";
+import { icons } from "../../../constants";
+import { Link } from "expo-router";
 
-const Footer = () => {
+const Footer = ({ url }) => {
   return (
-    <View>
-      <Text>Footer</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.likeBtn}>
+        <Image
+          source={icons.heart}
+          style={styles.likeBtnImage}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
 
-export default Footer
+      <TouchableOpacity
+        style={styles.applyBtn}
+        onPress={() => {
+          Linking.openURL(url);
+        }}
+      >
+        <Text style={styles.applyBtnText}>Apply directly</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default Footer;

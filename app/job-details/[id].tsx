@@ -39,6 +39,8 @@ const JobDetails = () => {
     return job.job_id === params.id;
   });
 
+  log({ idOfData }, params.id);
+
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>(tabs[0]);
 
@@ -47,37 +49,26 @@ const JobDetails = () => {
   function displayTabContent() {
     switch (activeTab) {
       case "About": {
-        const about = data.data[idOfData]?.job_highlights?.qualifications || [
-          "N/A",
+        const about = data?.data[idOfData]?.job_description || [
+          "No data provided",
         ];
 
+        // log({ about });
         return <Specifics title={"About"} points={about} />;
       }
 
       case "Qualifications": {
-        const qualifications: string[] = data.data[idOfData]?.job_highlights
+        const qualifications: string[] = data?.data[idOfData]?.job_highlights
           ?.qualifications || ["N/A"];
-
-        log("qualifications: ", data.data[idOfData].job_highlights);
-
-        return (
-          <Specifics
-            title={"Qualifications"}
-            points={qualifications || ["N/A"]}
-          />
-        );
+        // log({ qualifications });
+        return <Specifics title={"Qualifications"} points={qualifications} />;
       }
 
       case "Responsibilites": {
-        const responsibilites = data.data[idOfData]?.job_highlights
-          ?.qualifications || ["N/A"];
-
-        return (
-          <Specifics
-            title={"Responsibilites"}
-            points={responsibilites || ["N/A"]}
-          />
-        );
+        const responsibilites: string[] = data?.data[idOfData]?.job_highlights
+          ?.responsibilities || ["N/A"];
+        // log({ responsibilites });
+        return <Specifics title={"Responsibilites"} points={responsibilites} />;
       }
 
       default:
@@ -180,6 +171,13 @@ const JobDetails = () => {
             </View>
           )}
         </ScrollView>
+
+        <JobFooter
+          url={
+            data?.data[idOfData]?.job_google_link ||
+            "https://careers.google.com/jobs/results"
+          }
+        />
       </>
     </SafeAreaView>
   );

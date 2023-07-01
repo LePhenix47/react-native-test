@@ -26,6 +26,7 @@ import {
 import { useMockSuccess } from "../../../utils/hooks/use-mock-success.hook";
 
 export default function PopularJobs() {
+  const router = useRouter();
   const { data, isLoading, hasError, error } = useMockSuccess("popular");
 
   return (
@@ -79,6 +80,7 @@ export default function PopularJobs() {
                   // selectedJob={null}
                   handleCardPress={() => {
                     log("Clicked popular job card!");
+                    // router.push(`/job-details/${item.job_id}`);
                   }}
                 />
               );
