@@ -73,10 +73,8 @@ export default function PopularJobs() {
           <FlatList
             data={data.data}
             renderItem={({ item }: { item: JobData }) => {
-              log("PJ's FlatList:", item.job_id);
               return (
                 <PopularJobCard
-                  key={`${Math.random()}`}
                   item={item}
                   // selectedJob={null}
                   handleCardPress={() => {

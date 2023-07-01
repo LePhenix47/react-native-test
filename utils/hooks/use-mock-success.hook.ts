@@ -18,9 +18,9 @@ export function useMockSuccess(type: "nearby" | "popular") {
 
       const isNearbyData: boolean = type === "nearby";
       if (isNearbyData) {
-        result = await waitPromiseSuccess(1_000, popularJobsMock);
-      } else {
         result = await waitPromiseSuccess(1_000, nearbyJobsMock);
+      } else {
+        result = await waitPromiseSuccess(1_000, popularJobsMock);
       }
       // const result: any = await waitPromiseError(1_000, "Test error");
       setData(result);
