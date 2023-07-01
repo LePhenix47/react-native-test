@@ -55,10 +55,10 @@ const JobDetails = () => {
       }
 
       case "Qualifications": {
-        const qualifications = data.data[idOfData]?.job_highlights
+        const qualifications: string[] = data.data[idOfData]?.job_highlights
           ?.qualifications || ["N/A"];
 
-        log("qualifications: ", qualifications);
+        log("qualifications: ", data.data[idOfData].job_highlights);
 
         return (
           <Specifics
@@ -157,7 +157,7 @@ const JobDetails = () => {
             </Text>
           )}
 
-          {!data?.data?.length && (
+          {!data?.data?.length && !isLoading && (
             <Text>No data to show here ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻</Text>
           )}
 

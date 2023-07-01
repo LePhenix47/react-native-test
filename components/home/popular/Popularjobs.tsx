@@ -12,7 +12,7 @@ import { useRouter } from "expo-router";
 import styles from "./popularjobs.style";
 
 import { popularJobsMock } from "../../../mocks/popular-jobs.mock";
-import { MockedData } from "../../../utils/types/mocked-data.types";
+import { JobData, MockedData } from "../../../utils/types/mocked-data.types";
 
 import { COLORS, SIZES } from "../../../constants";
 
@@ -72,10 +72,11 @@ export default function PopularJobs() {
         {!!data && (
           <FlatList
             data={data.data}
-            renderItem={({ item }: { item: any }) => {
+            renderItem={({ item }: { item: JobData }) => {
+              log("PJ's FlatList:", item.job_id);
               return (
                 <PopularJobCard
-                  key={item}
+                  key={`${Math.random()}`}
                   item={item}
                   // selectedJob={null}
                   handleCardPress={() => {
@@ -84,7 +85,7 @@ export default function PopularJobs() {
                 />
               );
             }}
-            keyExtractor={({ item }) => item?.job_id}
+            keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />

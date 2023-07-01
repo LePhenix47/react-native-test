@@ -19,7 +19,7 @@ export const popularJobsMock: MockedData = {
       employer_website: null,
       employer_company_type: null,
       job_publisher: "LinkedIn",
-      job_id: "qBZMK_zlTH8AAAAAAAAAAA==",
+      job_id: "example_job_id_1",
       job_employment_type: "FULLTIME",
       job_title: "Python Developer",
       job_apply_link:
@@ -87,6 +87,8 @@ export const popularJobsMock: MockedData = {
       job_posting_language: "en",
       job_onet_soc: "15113200",
       job_onet_job_zone: "4",
+      //@ts-ignore
+      test_hot_reload: "Hot reload is enabled",
     },
     {
       employer_name: "Company B",
