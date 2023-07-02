@@ -5,7 +5,7 @@ import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 
 //React Native
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 //Components
@@ -24,17 +24,20 @@ import {
 
 //Constants
 import { COLORS, FONT, SHADOWS, SIZES, icons, images } from "../constants";
+import { warn } from "../utils/functions/console.functions";
 
 export default function Home(): JSX.Element {
   const router = useRouter();
 
   const [searchValue, setSearchValue] = useState("");
+
+  const hasDarkTheme: boolean = useColorScheme() === "dark";
   return (
-    //The <SafeAreaView /> componnt provides a safe zone to render the app's components without being covered by the device's hardware features
+    //The <SafeAreaView /> component provides a safe zone to render the app's components without being covered by the device's hardware features
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "transparent",
+        backgroundColor: COLORS.white,
       }}
     >
       <Stack.Screen
@@ -68,7 +71,13 @@ export default function Home(): JSX.Element {
         It basically acts as a <div> but with an overflow: scroll 
     */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ flex: 1, padding: SIZES.medium }}>
+        <View
+          style={{
+            flex: 1,
+            padding: SIZES.medium,
+            backgroundColor: COLORS.white,
+          }}
+        >
           <Welcome
             searchValue={searchValue}
             setSearchValue={setSearchValue}
