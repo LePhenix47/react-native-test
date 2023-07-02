@@ -30,7 +30,7 @@
     },
     "web": {
       "bundler": "metro",
-      "favicon": "./assets/icons/search.png"
+      "favicon": "./assets/favicon.png"
     }
   }
 }
