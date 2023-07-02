@@ -1,17 +1,36 @@
 {
   "expo": {
     "scheme": "acme",
-    "web": {
-      "bundler": "metro"
-    },
     "name": "react-native-app",
     "slug": "react-native-app",
+    "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "icon": "./assets/icons/search.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "purple"
+    },
+      "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "supportsTablet": true
     },
     "android": {
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "purple"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/icons/search.png"
     }
   }
 }
