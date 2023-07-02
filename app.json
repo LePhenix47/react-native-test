@@ -5,6 +5,13 @@
       "bundler": "metro"
     },
     "name": "react-native-app",
-    "slug": "react-native-app"
+    "slug": "react-native-app",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "userInterfaceStyle": "automatic"
+    },
+    "android": {
+      "userInterfaceStyle": "automatic"
+    }
   }
 }

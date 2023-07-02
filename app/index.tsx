@@ -75,7 +75,7 @@ export default function Home(): JSX.Element {
           style={{
             flex: 1,
             padding: SIZES.medium,
-            backgroundColor: COLORS.white,
+            backgroundColor: hasDarkTheme ? COLORS.black : COLORS.white,
           }}
         >
           <Welcome
